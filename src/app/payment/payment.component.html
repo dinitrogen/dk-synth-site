@@ -1,0 +1,80 @@
+<form [formGroup]="paymentElementForm">
+    <div class="w-2/3 mx-auto">
+        <!-- <h2 class="text-xl font-bold mb-4">Shipping Address</h2>
+        <div class="flex flex-wrap gap-x-10 mb-20">
+            <div class="w-full max-w-lg">
+                <label class="form-control" for="name">
+                    <div class="label">
+                        <span class="label-text">Name</span>
+                    </div>
+                        <input class="input input-bordered" placeholder="Name" formControlName="name" id="name"/>       
+                </label>
+            </div>
+
+            <div class="w-full max-w-lg">
+            <label class="form-control">
+                <div class="label">
+                <span class="label-text">Email</span>
+                </div>
+                <input class="input input-bordered" placeholder="Email" type="email" formControlName="email" />
+            </label>
+            </div>
+
+            <div class="w-full max-w-4xl">
+            <label class="form-control">
+                <div class="label">
+                <span class="label-text">Address</span>
+                </div>
+                <input class="input input-bordered" placeholder="Address" formControlName="address" />
+            </label>
+            </div>
+
+            <div class="w-full max-w-xs">
+            <label class="form-control">
+                <div class="label">
+                    <span class="label-text">City</span>
+                </div>
+                <input class="input input-bordered" placeholder="City" formControlName="city" />
+            </label>
+            </div>
+
+            <div class="w-full max-w-20">
+            <label class="form-control">
+                <div class="label">
+                <span class="label-text">State</span>
+                </div>
+                <input class="input input-bordered" placeholder="State" formControlName="state" />
+            </label>
+            </div>
+            
+            <div class="w-full max-w-40">
+            <label class="form-control">
+                <div class="label">
+                <span class="label-text">ZIP code</span>
+                </div>
+                <input class="input input-bordered" placeholder="ZIP Code" formControlName="zipcode" />
+            </label>
+            </div>
+        
+        </div> -->
+
+
+        <div class="mb-20">
+            <h2 class="text-xl font-bold mb-4">Credit Card Details</h2>        
+            @if (elementsOptions.clientSecret) {
+                <ngx-stripe-elements
+                    [stripe]="stripe"
+                    [elementsOptions]="elementsOptions"
+                >
+                    <ngx-stripe-address #shippingAddress [options]="shippingAddressOptions" />
+                    <ngx-stripe-address #billingAddress [options]="billingAddressOptions" />
+                    <ngx-stripe-payment [options]="paymentElementOptions" />
+                </ngx-stripe-elements>
+            }
+        </div>
+    
+        <div class="flex justify-center">
+            <button class="btn text-md font-bold" (click)="pay()">Submit Payment</button>
+        </div>
+    </div>
+</form>

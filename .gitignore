@@ -37,6 +37,8 @@ yarn-error.log
 testem.log
 /typings
 .firebase/*
+clientConfig.ts
+serverConfig.js
 
 # System files
 .DS_Store

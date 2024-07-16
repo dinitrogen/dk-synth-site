@@ -1,13 +1,23 @@
-<div class="card card-side bg-base-100 shadow-xl w-2/3 mx-auto">
+<div class="card card-side bg-base-100 shadow-xl w-2/3 mx-auto mt-10">
     <figure>
       <img src='synthrig.jpg'/>
     </figure>
     <div class="card-body">
       <h2 class="card-title">Welcome!</h2>
-      <p>We offer a range analog synthesizer modules in the popular Eurorack format. 
-        We also offer a range of educational resources to help you become more familiar with this fun and addictive world of analog synthesis.</p>
+      <p>We offer a range analog synthesizer modules and parts in the popular Eurorack format. 
+        We also offer a range of educational resources to help you become more familiar with the fun and addictive world of analog synthesis.</p>
       <div class="card-actions justify-end">
         <a class="btn btn-neutral" routerLink="/shop">Shop</a>
       </div>
-    </div>
-  </div>
+    </div>    
+</div>
+
+<div class="mt-5 mx-auto w-3/4">
+  <p *ngIf="message">
+    {{ message.message }}
+  </p>
+  <p *ngIf="!message">
+    Not connected to the DK Synth server.
+  </p>
+</div>
+
