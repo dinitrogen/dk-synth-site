@@ -3,9 +3,9 @@ import { ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/fo
 import { injectStripe, StripeElementsDirective, StripePaymentElementComponent, StripeAddressComponent } from 'ngx-stripe';
 import { StripeElementsOptions, StripePaymentElementOptions, StripeAddressElementOptions } from '@stripe/stripe-js';
 import { PaymentService } from '../services/payment.service';
-import { config } from '../../../clientConfig';
+import { environment } from '../../environments/environment';
 
-const stripeKey = config.stripeKey || '';
+const stripeKey = environment.stripeKey || '';
 
 @Component({
   selector: 'app-payment',
@@ -63,7 +63,6 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.paymentService.preparePayment({amount: this.amount}).subscribe((res: any) => {
-      console.log(res.paymentIntent);
       this.paymentIntent = res.paymentIntent;
       this.elementsOptions.clientSecret = res.paymentIntent.client_secret as string;
     })
@@ -72,7 +71,6 @@ export class PaymentComponent implements OnInit {
   async pay() {
     const result = await this.shippingAddress.getValue();
     const{ complete, isNewAddress, value } = result;
-    console.log(value);
     
     if (this.paying() || !complete) return;
     this.paying.set(true);
@@ -101,7 +99,7 @@ export class PaymentComponent implements OnInit {
       })
       .subscribe(result => {
         this.paying.set(false);
-        console.log('Result', result);
+        // console.log('Result', result);
         if (result.error) {
           // Show error to your customer (e.g., insufficient funds)
           alert('Oops!' + result.error.message);

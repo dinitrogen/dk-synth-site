@@ -1,12 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-shop',
   standalone: true,
-  imports: [],
+  imports: [NgFor],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })
-export class ShopComponent {
+export class ShopComponent implements OnInit {
   pageName: String = 'Shop';
+
+  products: any;
+
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit(): void {
+
+    this.apiService.getProducts().subscribe(data => {
+      this.products = data;
+    });
+  }
 }

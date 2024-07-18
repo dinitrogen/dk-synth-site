@@ -37,8 +37,6 @@ yarn-error.log
 testem.log
 /typings
 .firebase/*
-clientConfig.ts
-serverConfig.js
 .env
 
 # System files

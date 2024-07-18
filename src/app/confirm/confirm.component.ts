@@ -22,7 +22,6 @@ export class ConfirmComponent implements OnInit {
 
     this.paymentService.retrievePayment({paymentId: this.paymentId}).subscribe((res: any) => {
       this.paymentIntent = res.paymentIntent;
-      console.log(this.paymentIntent);
     });
   }
 }

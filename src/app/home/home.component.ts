@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { APP_BASE_HREF, NgIf, PlatformLocation } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../services/api.service';
-
 
 @Component({
   selector: 'app-home',
@@ -22,5 +21,4 @@ export class HomeComponent implements OnInit {
       this.message = data;
     });
   }
-
 }

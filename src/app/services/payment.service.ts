@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PaymentService {
+    private baseHref: string = environment.baseHref;
+
     constructor(private http: HttpClient) {}
 
     preparePayment(data:any) {
@@ -13,7 +16,7 @@ export class PaymentService {
               'Content-Type':  'application/json'
             })
           };
-        return this.http.post('http://localhost:3000/api/payment', data, httpOptions);
+        return this.http.post(this.baseHref + '/api/payment', data, httpOptions);
     }
 
     retrievePayment(data:any) {
@@ -22,6 +25,6 @@ export class PaymentService {
           'Content-Type':  'application/json'
         })
       };
-      return this.http.post('http://localhost:3000/api/paymentget', data, httpOptions);
+      return this.http.post(this.baseHref + '/api/paymentget', data, httpOptions);
     }
 }
