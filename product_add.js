@@ -31,12 +31,16 @@ async function getProducts() {
 }
 
 
-// updateProductById('66980b319cdf1ab794f0bd46');
+// updateProductById('66980b0de364ed9743fc5df6');
 async function updateProductById(id) {
     try {
         const product = await Product.findById(id);
         console.log(product);
-        product.imgUrl = 'https://res.cloudinary.com/dopr8pnvl/image/upload/c_auto,g_auto,h_500,w_500/v1721162075/synth';
+        product.imgUrl = { 
+            front: 'https://res.cloudinary.com/dopr8pnvl/image/upload/f_auto,q_auto/vco_front?_a=BAMAEuXw0',
+            side: 'https://res.cloudinary.com/dopr8pnvl/image/upload/f_auto,q_auto/vco_side?_a=BAMAEuXw0',
+            back: 'https://res.cloudinary.com/dopr8pnvl/image/upload/f_auto,q_auto/vco_back?_a=BAMAEuXw0'
+        }
         await product.save();
     } catch (e) {
         console.log(e.message);

@@ -1,0 +1,8 @@
+
+swiper-container {
+    --swiper-navigation-size: 44px;
+    --swiper-navigation-top-offset: 50%;
+    --swiper-navigation-sides-offset: 10px;
+    --swiper-navigation-color: white;
+    --swiper-pagination-color: white;
+  }

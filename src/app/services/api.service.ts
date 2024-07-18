@@ -18,4 +18,8 @@ export class ApiService {
     getProducts() {
         return this.http.get(this.baseHref + '/products');
     }
+
+    getProductByName(name: string) {
+        return this.http.get(this.baseHref + '/product/' + name);
+    }
 }

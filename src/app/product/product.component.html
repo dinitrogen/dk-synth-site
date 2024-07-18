@@ -1,0 +1,51 @@
+<div class="prose w-2/3 mx-auto">
+    <div class="breadcrumbs text-sm">
+        <ul>
+            <li><a routerLink="/home">Home</a></li>
+            <li><a routerLink="/shop">Products</a></li>
+            <li>{{product?.name}}</li>
+        </ul>
+    </div>
+    <h1>{{product?.name}}</h1>
+    <div class="w-3/4 mx-auto">
+        <swiper-container navigation="true" pagination="true" grab-cursor loop mousewheel>
+            <swiper-slide>
+                <img src={{product?.imgUrl?.front}}/>
+            </swiper-slide>
+            <swiper-slide>
+                <img src={{product?.imgUrl?.side}}/>
+            </swiper-slide>
+            <swiper-slide>
+                <img src={{product?.imgUrl?.back}}/>
+            </swiper-slide>
+        </swiper-container>
+    </div>
+    <p>
+      {{product?.description}}
+    </p>
+    <p class="text-lg">
+      ${{product?.price}}.00
+    </p>
+    <div class="flex justify-center my-10">
+        <button class="btn btn-neutral text-md mx-2" routerLink="/shop">Back to products</button>
+        <button class="btn btn-primary text-xl mx-2" (click)="addToCart()">Add to Cart</button>
+    </div>
+
+    @if (addedToCart) {
+    <div role="alert" class="alert alert-success my-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 shrink-0 stroke-current"
+          fill="none"
+          viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Successfully added to cart!</span>
+      </div>
+    }
+</div>
+

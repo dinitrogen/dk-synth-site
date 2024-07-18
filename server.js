@@ -74,7 +74,16 @@ app.get('/products', async (req, res) => {
     } catch (e) {
         res.status(500).json({error: e.message});
     }
-}); 
+});
+
+app.get('/product/:id', async (req, res) => {
+    try {
+        const product = await Product.findOne({'name': req.params.id});
+        res.json(product);
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
+})
 
 app.listen(port, () => {
     console.log('Server listening on port ' + port);

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { NgFor } from '@angular/common';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, RouterLink, RouterOutlet],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })
@@ -20,6 +21,7 @@ export class ShopComponent implements OnInit {
 
     this.apiService.getProducts().subscribe(data => {
       this.products = data;
+      console.log(data);
     });
   }
 }

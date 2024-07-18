@@ -67,14 +67,19 @@
                     [elementsOptions]="elementsOptions"
                 >
                     <ngx-stripe-address #shippingAddress [options]="shippingAddressOptions" />
-                    <ngx-stripe-address #billingAddress [options]="billingAddressOptions" />
+                    <!-- <ngx-stripe-address #billingAddress [options]="billingAddressOptions" /> -->
                     <ngx-stripe-payment [options]="paymentElementOptions" />
                 </ngx-stripe-elements>
+
+                <div class="flex justify-center mt-5">
+                    <button class="btn text-md font-bold" (click)="pay()">Submit Payment</button>
+                </div>
+            } @else {
+                <div class="flex justify-center">
+                    <span class="loading loading-spinner loading-lg"></span> 
+                </div>
             }
-        </div>
-    
-        <div class="flex justify-center">
-            <button class="btn text-md font-bold" (click)="pay()">Submit Payment</button>
+            
         </div>
     </div>
 </form>
