@@ -1,5 +1,7 @@
 # DK Synthesis
 
+<img src="./screenshots/dksynth-screen-1.png" width="400">
+
 ## Description
 
 DK-synthesis.com is an e-commerce site for a small business building and selling analog synthesizer modules, created with Angular and NodeJS. Users can browse the shop, add purchases to their cart and checkout with a secure embedded Stripe payment. They can also learn more about analog synthesis through the education resources provided. The app is compatible and responsive to both desktop and mobile use.
