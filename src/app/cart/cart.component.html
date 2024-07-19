@@ -1,7 +1,38 @@
 <div class="mx-auto w-3/4">
     <h2 class="text-xl font-bold mb-4">Your cart</h2>
-    <p class="my-20">---order details---</p>
-    <div class="flex justify-center">
-        <a class="btn text-md font-bold" routerLink="/payment">Proceed to checkout</a>
+    
+    
+    <div class="flex flex-wrap justify-center gap-4 my-20">
+        <div class="card md:card-side card-bordered bg-base-100 shadow-xl flex-card-sm md:flex-card"
+            *ngFor="let cartItem of cart">
+            <figure>
+              <img class="w-60" src={{cartItem?.product?.imgUrl?.front}}/>
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">{{cartItem?.product?.name}}</h2>
+              <p class="text-lg font-bold">${{cartItem?.product?.price}}.00 x {{cartItem?.quantity}}</p>
+              <hr>
+              <p class="text-lg font-bole">${{cartItem?.totalPrice}}.00</p>
+              <div class="card-actions justify-end">
+
+                <div class="relative w-40 mx-auto">
+                    <button class="absolute left-0 top-0 rounded-r-none btn btn-square" (click)="decreaseQty(cartItem)">-</button>
+                    <input readonly type="text" class="w-full text-center px-12 input input-bordered" value={{cartItem?.quantity}}/>
+                    <button class="absolute right-0 top-0 rounded-l-none btn btn-square" (click)="increaseQty(cartItem)" >+</button>
+                </div>
+                <a class="link" (click)="removeFromCart(cartItem)">Remove</a>
+                
+              </div>
+            </div>    
+        </div>
     </div>
+    
+    @if (cart.length > 0) {
+    <div class="w-3/4 mx-auto text-lg font-bold text-center my-10"><p>Total price: ${{grandTotal}}.00</p></div>
+    <div class="flex justify-center">   
+        <a class="btn btn-primary text-md font-bold mb-20" routerLink="/payment">Proceed to checkout</a>
+    </div>
+    } @else {
+        <div>Your cart has nothing in it.</div>
+    }
 </div>

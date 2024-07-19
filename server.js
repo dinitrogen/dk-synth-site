@@ -50,21 +50,28 @@ app.post('/create-checkout-session', async (req, res) => {
         mode: 'payment',
         return_url: ''
     });
-
     res.json({ id: session.id });
 });
 
 app.post('/api/payment', async (req, res) => {
-    const paymentIntent = await stripe.paymentIntents.create({
-        amount: req.body.amount,
-        currency: 'usd'
-    })
-    res.send({paymentIntent});
+    try {
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: req.body.amount,
+            currency: 'usd'
+        })
+        res.send({paymentIntent});
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
 });
 
 app.post('/api/paymentget', async (req, res) => {
-    const paymentIntent = await stripe.paymentIntents.retrieve(req.body.paymentId);
-    res.send({paymentIntent});
+    try {
+        const paymentIntent = await stripe.paymentIntents.retrieve(req.body.paymentId);
+        res.send({paymentIntent});
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
 });
 
 app.get('/products', async (req, res) => {

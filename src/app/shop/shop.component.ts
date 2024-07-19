@@ -21,7 +21,6 @@ export class ShopComponent implements OnInit {
 
     this.apiService.getProducts().subscribe(data => {
       this.products = data;
-      console.log(data);
     });
   }
 }

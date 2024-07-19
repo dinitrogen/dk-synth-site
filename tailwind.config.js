@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       flex: {
-        'card': '0 0 30%'
+        'card': '0 0 45%',
+        'card-sm': '0 0 75%'
       }
     },
     screen: {

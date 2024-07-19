@@ -20,15 +20,26 @@
             </swiper-slide>
         </swiper-container>
     </div>
-    <p>
-      {{product?.description}}
-    </p>
-    <p class="text-lg">
-      ${{product?.price}}.00
-    </p>
-    <div class="flex justify-center my-10">
+    <div class="text-center">
+        <p>
+        {{product?.description}}
+        </p>
+        <p class="text-lg">
+        ${{product?.price}}.00
+        </p>
+        <div class="relative w-40 mx-auto">
+            <button class="absolute left-0 top-0 rounded-r-none btn btn-square" (click)="decreaseQty()">-</button>
+            <input type="text" class="w-full text-center px-12 input input-bordered" value={{productQty}}/>
+            <button class="absolute right-0 top-0 rounded-l-none btn btn-square" (click)="increaseQty()">+</button>
+        </div>
+    </div>
+</div>
+
+<div class="w-1/2 mx-auto">
+    <div class="flex flex-wrap justify-center gap-y-10 gap-x-4 my-10">
+        <button class="btn btn-primary text-xl mx-2" (click)="addToCart(product)">Add to Cart</button>
         <button class="btn btn-neutral text-md mx-2" routerLink="/shop">Back to products</button>
-        <button class="btn btn-primary text-xl mx-2" (click)="addToCart()">Add to Cart</button>
+        
     </div>
 
     @if (addedToCart) {
@@ -44,7 +55,7 @@
             stroke-width="2"
             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <span>Successfully added to cart!</span>
+        <span>Successfully added to <a class="link" routerLink="/cart">cart!</a></span>
       </div>
     }
 </div>

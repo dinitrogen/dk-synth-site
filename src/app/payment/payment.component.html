@@ -60,7 +60,8 @@
 
 
         <div class="mb-20">
-            <h2 class="text-xl font-bold mb-4">Credit Card Details</h2>        
+            <h2 class="text-xl font-bold mb-4">Checkout</h2>
+            <h3 class="text-lg mb-4">Please enter your payment information</h3>        
             @if (elementsOptions.clientSecret) {
                 <ngx-stripe-elements
                     [stripe]="stripe"
@@ -70,9 +71,11 @@
                     <!-- <ngx-stripe-address #billingAddress [options]="billingAddressOptions" /> -->
                     <ngx-stripe-payment [options]="paymentElementOptions" />
                 </ngx-stripe-elements>
-
-                <div class="flex justify-center mt-5">
-                    <button class="btn text-md font-bold" (click)="pay()">Submit Payment</button>
+                
+                <div class="text-center text-2xl mt-10">Total payment: ${{amount}}.00</div>
+                <div class="flex gap-10 justify-center mt-5">
+                    <button class="btn btn-neutral text-sm" routerLink="/cart">Return to cart</button>
+                    <button class="btn btn-primary text-md font-bold" (click)="pay()">Submit Payment</button>
                 </div>
             } @else {
                 <div class="flex justify-center">

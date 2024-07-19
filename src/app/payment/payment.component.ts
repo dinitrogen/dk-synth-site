@@ -4,13 +4,15 @@ import { injectStripe, StripeElementsDirective, StripePaymentElementComponent, S
 import { StripeElementsOptions, StripePaymentElementOptions, StripeAddressElementOptions } from '@stripe/stripe-js';
 import { PaymentService } from '../services/payment.service';
 import { environment } from '../../environments/environment';
+import { Router, RouterLink } from '@angular/router';
+import { CartService } from '../services/cart.service';
 
 const stripeKey = environment.stripeKey || '';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [ StripeElementsDirective, StripePaymentElementComponent, StripeAddressComponent, ReactiveFormsModule],
+  imports: [ StripeElementsDirective, StripePaymentElementComponent, StripeAddressComponent, ReactiveFormsModule, RouterLink],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })
@@ -18,10 +20,12 @@ export class PaymentComponent implements OnInit {
   @ViewChild(StripePaymentElementComponent) paymentElement!: StripePaymentElementComponent;
   @ViewChild('shippingAddress') shippingAddress!: StripeAddressComponent;
   
+  router: Router = inject(Router);
+
   private readonly fb = inject(UntypedFormBuilder);
   private readonly paymentService = inject(PaymentService);
 
-  private amount: number = 125;
+  amount: number = 0;
   private paymentIntent: any;
 
   paymentElementForm = this.fb.group({
@@ -61,7 +65,15 @@ export class PaymentComponent implements OnInit {
   stripe = injectStripe(stripeKey);
   paying = signal(false);
 
+  constructor(private cartService: CartService) {}
+
   ngOnInit(): void {
+    this.cartService.currentGrandTotal.subscribe(total => this.amount = total);
+    
+    if (!this.amount) {
+      this.router.navigate(['error']);
+    }
+    
     this.paymentService.preparePayment({amount: this.amount}).subscribe((res: any) => {
       this.paymentIntent = res.paymentIntent;
       this.elementsOptions.clientSecret = res.paymentIntent.client_secret as string;

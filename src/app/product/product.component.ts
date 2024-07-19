@@ -3,10 +3,9 @@ import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
 import {register} from 'swiper/element/bundle';
+import { CartService } from '../services/cart.service';
 
 register();
-
-
 
 @Component({
   selector: 'app-product',
@@ -21,9 +20,10 @@ export class ProductComponent implements OnInit {
   router: Router = inject(Router);
   productName: string = '';
   product: any;
+  productQty: number = 1;
   addedToCart: boolean = false;
   
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private cartService: CartService) {
     this.productName = this.route.snapshot.params['id'];
   }
 
@@ -37,8 +37,27 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  decreaseQty() {
+    // get current input value field. if 1, return. else, quantity--
+    if (this.productQty === 1) {
+      return
+    } else {
+      this.productQty--;
+    }
+  }
 
-  addToCart() {
+  increaseQty() {
+    // get current input value. if <max>, return, else qty++
+    if (this.productQty === 10) {
+      return
+    } else {
+      this.productQty++;
+    }
+  }
+
+  addToCart(product: any) {
+    this.cartService.addToCart(product, this.productQty);
+    
     this.addedToCart = true;
   }
 }
