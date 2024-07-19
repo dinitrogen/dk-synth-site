@@ -9,7 +9,11 @@ mongoose.connect(`mongodb+srv://${config.mongooseClient}:${config.mongooseSecret
 // addProduct();
 async function addProduct() {
     try {
-        const product = await Product.create({ name: 'MIDI <> CV', price: 175, description: 'MIDI to CV controller'});
+        const product = await Product.create({ name: 'Eurorack case', price: 850, category: 'cases', description: 'Solid wood Eurorack case, 9U x 126HP. Features a soft-close keyboard drawer. (Module rails and keyboard not included.)',
+            imgUrl: {
+                front: 'tbd',
+            }
+        });
         // this does the same thing:
         // const vcfProduct = new Product({ name: 'VCF', price: 125, description: 'Voltage controlled filter'});
         // await vcfProduct.save();
@@ -31,16 +35,17 @@ async function getProducts() {
 }
 
 
-// updateProductById('66980b0de364ed9743fc5df6');
+updateProductById('669aec3f64689e532b379524');
 async function updateProductById(id) {
     try {
         const product = await Product.findById(id);
         console.log(product);
-        product.imgUrl = { 
-            front: 'https://res.cloudinary.com/dopr8pnvl/image/upload/f_auto,q_auto/vco_front?_a=BAMAEuXw0',
-            side: 'https://res.cloudinary.com/dopr8pnvl/image/upload/f_auto,q_auto/vco_side?_a=BAMAEuXw0',
-            back: 'https://res.cloudinary.com/dopr8pnvl/image/upload/f_auto,q_auto/vco_back?_a=BAMAEuXw0'
-        }
+        product.description = 'BIT BOX TURBO MIDI-controlled chiptune synthesizer'
+        // product.imgUrl = { 
+        //     front: 'https://res.cloudinary.com/dopr8pnvl/image/upload/f_auto,q_auto/screws_front?_a=BAMAEuXw0',
+        //     back: '',
+        //     side: ''
+        // }
         await product.save();
     } catch (e) {
         console.log(e.message);

@@ -1,6 +1,11 @@
     <div class="w-3/4 mx-auto">
       <h2 class="text-xl">Products</h2>
     
+    @if (isLoading) {
+      <div class="flex justify-center mt-40">
+          <span class="loading loading-spinner loading-lg"></span> 
+      </div>
+  } @else {
     <div class="flex flex-wrap justify-center gap-4 my-10">
       <div class="card md:card-side card-bordered bg-base-100 shadow-xl flex-card-sm md:flex-card"
           *ngFor="let product of products">
@@ -17,4 +22,5 @@
           </div>    
       </div>
     </div>
+  }
   </div>

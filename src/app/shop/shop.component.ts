@@ -11,6 +11,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './shop.component.css'
 })
 export class ShopComponent implements OnInit {
+  isLoading:boolean = true;
+  
   pageName: String = 'Shop';
 
   products: any;
@@ -21,6 +23,8 @@ export class ShopComponent implements OnInit {
 
     this.apiService.getProducts().subscribe(data => {
       this.products = data;
+      this.isLoading = false;
     });
+    
   }
 }

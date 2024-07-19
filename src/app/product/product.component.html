@@ -6,18 +6,30 @@
             <li>{{product?.name}}</li>
         </ul>
     </div>
+
+    @if (isLoading) {
+        <div class="flex justify-center mt-40">
+            <span class="loading loading-spinner loading-lg"></span> 
+        </div>
+    } @else {
+
     <h1>{{product?.name}}</h1>
     <div class="w-3/4 mx-auto">
         <swiper-container navigation="true" pagination="true" grab-cursor loop mousewheel>
+            
             <swiper-slide>
                 <img src={{product?.imgUrl?.front}}/>
             </swiper-slide>
+            @if (product?.imgUrl?.side) {
             <swiper-slide>
                 <img src={{product?.imgUrl?.side}}/>
             </swiper-slide>
+            }
+            @if (product?.imUrl?.back) {
             <swiper-slide>
                 <img src={{product?.imgUrl?.back}}/>
             </swiper-slide>
+            }
         </swiper-container>
     </div>
     <div class="text-center">
@@ -33,8 +45,10 @@
             <button class="absolute right-0 top-0 rounded-l-none btn btn-square" (click)="increaseQty()">+</button>
         </div>
     </div>
+    }
 </div>
 
+@if (!isLoading) { 
 <div class="w-1/2 mx-auto">
     <div class="flex flex-wrap justify-center gap-y-10 gap-x-4 my-10">
         <button class="btn btn-primary text-xl mx-2" (click)="addToCart(product)">Add to Cart</button>
@@ -59,4 +73,5 @@
       </div>
     }
 </div>
+}
 

@@ -22,6 +22,7 @@ export class ProductComponent implements OnInit {
   product: any;
   productQty: number = 1;
   addedToCart: boolean = false;
+  isLoading: boolean = true;
   
   constructor(private apiService: ApiService, private cartService: CartService) {
     this.productName = this.route.snapshot.params['id'];
@@ -31,6 +32,7 @@ export class ProductComponent implements OnInit {
     this.apiService.getProductByName(this.productName).subscribe(product => {
       if (product) {
         this.product = product;
+        this.isLoading = false;
       } else {
         this.router.navigate(['error']);
       }
