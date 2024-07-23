@@ -20,10 +20,10 @@ DK-synthesis.com is an e-commerce site for a small business building and selling
 - [TailwindCSS](https://tailwindcss.com/)
 - [DaisyUI](https://daisyui.com/)
 - [Cloudinary](https://cloudinary.com/)
+- [Nodemailer](https://nodemailer.com/)
 
 ## Future updates
 - Add authentication so returning customers can login and save preferences
-- Add email notification system for notifications and newsletters
 - Add more educational content
 
  
