@@ -9,6 +9,7 @@ import { CartService } from '../services/cart.service';
 
 const stripeKey = environment.stripeKey || '';
 
+
 @Component({
   selector: 'app-payment',
   standalone: true,
@@ -20,6 +21,8 @@ export class PaymentComponent implements OnInit {
   @ViewChild(StripePaymentElementComponent) paymentElement!: StripePaymentElementComponent;
   @ViewChild('shippingAddress') shippingAddress!: StripeAddressComponent;
   
+  private baseHref: string = environment.clientBaseHref;
+
   router: Router = inject(Router);
 
   private readonly fb = inject(UntypedFormBuilder);
@@ -105,7 +108,7 @@ export class PaymentComponent implements OnInit {
               }
             }
           },
-          return_url: 'http://localhost:4200/confirm'
+          return_url: this.baseHref + '/confirm'
         },
         redirect: 'if_required'
       })
@@ -119,7 +122,7 @@ export class PaymentComponent implements OnInit {
           // The payment has been processed!
           if (result.paymentIntent.status === 'succeeded') {
             // Show a success message to your customer
-            window.location.href = "http://localhost:4200/confirm?paymentId=" + this.paymentIntent.id
+            window.location.href = this.baseHref + "/confirm?paymentId=" + this.paymentIntent.id
           }
         }
       });

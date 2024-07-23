@@ -22,4 +22,18 @@ export class ApiService {
     getProductByName(name: string) {
         return this.http.get(this.baseHref + '/product/' + name);
     }
+
+    sendSignupEmail(name: any, email: any) {
+        const req = {
+            name: name, email: email
+        }
+        return this.http.post(this.baseHref + '/signup', req);
+    }
+
+    sendContactEmail(name: any, email: any, message: any) {
+        const req = {
+            name: name, email: email, message: message
+        }
+        return this.http.post(this.baseHref + '/contact', req);
+    }
 }
